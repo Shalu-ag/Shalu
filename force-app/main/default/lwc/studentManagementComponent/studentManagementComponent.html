@@ -1,0 +1,94 @@
+<template>
+
+    <lightning-card title="Student Information">
+
+        <div class="slds-grid slds-gutters">
+            <div class="slds-col">
+                <lightning-combobox
+                    name="school"
+                    label="School"
+                    value={selectedSchoolId}
+                    placeholder="-- Please Select School --"
+                    options={schoolOptions}
+                    onchange={handleSchoolChange}>
+                </lightning-combobox>
+            </div>
+            <div class="slds-col">
+                <lightning-combobox
+                    name="class"
+                    label="Class"
+                    value={selectedClassId}
+                    placeholder="-- Please Select Class --"
+                    options={classOptions}
+                    onchange={handleClassChange}
+                    disabled={disableClassDropdown}>
+                </lightning-combobox>
+            </div>
+        </div>
+
+        <div class="slds-m-top_medium">
+            <lightning-button label="New" variant="brand" onclick={handleNew}></lightning-button>
+            <lightning-button label="Delete" variant="destructive" onclick={handleDelete}></lightning-button>
+        </div>
+
+        <lightning-datatable
+            key-field="Id"
+            data={studentList}
+            columns={columns}
+            selected-rows={selectedRowIds}
+            onrowselection={handleRowSelection}
+            onrowaction={handleRowAction}>
+        </lightning-datatable>
+
+        <template if:true={showModal}>
+            <section role="dialog" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <h2 class="slds-modal__title">{modalTitle}</h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium">
+                        <lightning-input label="Name" value={studentName} onchange={handleNameChange}></lightning-input>
+                        <lightning-input label="Age" type="number" value={studentAge} onchange={handleAgeChange}></lightning-input>
+                        <lightning-input label="Email" type="email" value={studentEmail} onchange={handleEmailChange}></lightning-input>
+                        <lightning-combobox
+                            label="School"
+                            value={selectedSchoolId}
+                            placeholder="Select School"
+                            options={schoolOptions}
+                            onchange={handleSchoolChange}>
+                        </lightning-combobox>
+                        <lightning-combobox
+                            label="Class"
+                            value={selectedClassId}
+                            placeholder="Select Class"
+                            options={classOptions}
+                            onchange={handleClassChange}>
+                        </lightning-combobox>
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <lightning-button label="Cancel" onclick={closeModal}></lightning-button>
+                        <lightning-button variant="brand" label="Save" onclick={handleSave}></lightning-button>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+
+    </lightning-card>
+
+</template>
+<template>
+    <lightning-card title="Users" icon-name="standard:user">
+        <template if:true={users}>
+            <lightning-datatable
+                key-field="Id"
+                data={users}
+                columns={columns}>
+            </lightning-datatable>
+        </template>
+
+        <template if:true={error}>
+            <p class="slds-text-color_error">Error: {errorMessage}</p>
+        </template>
+    </lightning-card>
+</template>

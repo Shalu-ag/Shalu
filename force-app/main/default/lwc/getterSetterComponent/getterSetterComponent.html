@@ -1,0 +1,25 @@
+<template>
+    <lightning-card title="Getter Setter Example">
+        <div class="slds-p-around_medium">
+            <p>Hello, {name}!</p>
+
+
+            <lightning-input
+                label="Enter Age (must be ≤ 25)"
+                onchange={handleChange}
+                type="number"
+                value={newAge}>
+            </lightning-input>
+
+
+            <lightning-button
+                label="Set Age"
+                onclick={handleClick}
+                class="slds-m-top_medium">
+            </lightning-button>
+
+
+            <p class="slds-m-top_medium">Stored Age: {age}</p>
+        </div>
+    </lightning-card>
+</template>

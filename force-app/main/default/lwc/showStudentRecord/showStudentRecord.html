@@ -1,0 +1,28 @@
+<template>
+    <lightning-card title="Active Student Records">
+        <div class="slds-p-around_medium">
+
+            
+            <lightning-input
+                type="number"
+                label="Enter number of active students to show"
+                onchange={handleInputChange}
+                value={numberOfRecords}>
+            </lightning-input>
+
+            
+            <template if:true={showError}>
+                <p style="color: red; font-weight: bold;">Please enter a number greater than 0.</p>
+            </template>
+
+            
+            <lightning-datatable
+                key-field="Id"
+                data={filteredStudents}
+                columns={columns}
+                hide-checkbox-column="true">
+            </lightning-datatable>
+
+        </div>
+    </lightning-card>
+</template>

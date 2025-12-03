@@ -1,0 +1,20 @@
+<template>
+    <lightning-card title="User Management">
+        <lightning-button label="New User" variant="brand" onclick={handleNewUser}></lightning-button>
+
+        <lightning-datatable
+            key-field="Id"
+            data={users}
+            columns={columns}
+            onrowaction={handleRowAction}>
+        </lightning-datatable>
+    </lightning-card>
+
+    <template if:true={isModalOpen}>
+        <c-user-modal-component
+            user-record={selectedUser}
+            onclosemodal={handleCloseModal}
+            onsuccessmodal={handleSuccessModal}>
+        </c-user-modal-component>
+    </template>
+</template>

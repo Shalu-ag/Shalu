@@ -1,0 +1,16 @@
+<template>
+    <lightning-card title="Pagination Example" icon-name="custom:custom63">
+        <lightning-datatable
+            key-field="Id"
+            data ={paginatedData}
+            columns ={columns}>
+        </lightning-datatable>
+        <div class="slds_align_absolute-center  slds-m-top_medium">
+            <lightning-button label="Previous" onclick={handlePrevious} disabled={isPreviousDisabled}></lightning-button>
+                <span class="slds-m-horizontal_medium">Page {currentPage} to {totalPage}</span>
+                <lightning-button label="Next" onclick={handleNext} disabled={isNextDisabled}></lightning-button>         
+        </div>
+        
+    </lightning-card>
+    
+</template>

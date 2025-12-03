@@ -1,0 +1,15 @@
+<aura:component implements="force:hasrecordId,flexipage:availableForAllPageTypes" access="global" controller="createAccountRecordCtrl">
+    <div class="slds-page-header">
+        Account Form
+    </div>
+    <div>
+        <lightning:input type="text" label="Enter Name" aura:id="accName" required="true"></lightning:input>
+        <lightning:input type="text" label="Enter Phone" aura:id="accPhone" required="true"></lightning:input>
+        <lightning:input type="text" label="Enter Rating" aura:id="accRating" required="true"></lightning:input>
+        
+    </div>
+    <div class="slds-docked-form-footer">
+        <lightning:button  label="create Account" variant="brand" onclick="{!c.createAccRecs}"></lightning:button>
+    </div>
+
+</aura:component>

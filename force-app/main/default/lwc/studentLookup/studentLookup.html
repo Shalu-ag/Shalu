@@ -1,0 +1,50 @@
+<template>
+    <lightning-card title="Student Information">
+        <lightning-button
+            variant="brand"
+            label="New User"
+            title="Create New User"
+            onclick={handleNew}
+            class="slds-m-left_x-small">
+        </lightning-button>
+        <lightning-button
+            variant="danger"
+            label="Delete"
+            title="Delete User"
+            onclick={handleDelete}
+            class="slds-m-left_x-small">
+        </lightning-button>
+    
+    <lightning-combobox 
+        label="School" 
+        value={selectedSchoolId} 
+        options={schoolOptions} 
+        onchange={handleSchoolChange}>
+    </lightning-combobox>
+
+    <lightning-combobox 
+        label="Class" 
+        value={selectedClassId} 
+        options={classOptions} 
+        onchange={handleClassChange} 
+        disabled={isClassDisabled}>
+    </lightning-combobox>
+    <div class="slds-m-top_medium">
+
+    <lightning-datatable 
+        data={students} 
+        columns={columns} 
+        key-field="Id"
+        onrowaction={handleRowAction}
+        hide-checkbox-column>
+    </lightning-datatable>
+</div>
+    <c-student-modal
+            if:true={isModalOpen}
+            student-record={selectedUser}
+            onclosemodal={closeModal}
+            onsuccessmodal={refreshUserList}>
+        </c-student-modal>
+</lightning-card>
+</template>
+    

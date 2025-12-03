@@ -1,0 +1,107 @@
+/* Custom styling for Account CRUD component */
+
+.slds-card {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.slds-box {
+    border: 1px solid #dddbda;
+    border-radius: 6px;
+}
+
+.slds-modal__container {
+    max-width: 500px;
+}
+
+.slds-notification-banner {
+    margin-bottom: 1rem;
+}
+
+.slds-button {
+    border-radius: 4px;
+}
+
+.slds-button_brand {
+    background-color: #0070d2;
+}
+
+.slds-button_destructive {
+    background-color: #c23934;
+}
+
+.slds-datatable {
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.slds-datatable__header {
+    background-color: #f3f2f2;
+}
+
+.slds-datatable__row:hover {
+    background-color: #f8f9fa;
+}
+
+.slds-form-element__label {
+    font-weight: 600;
+    color: #3e3e3c;
+}
+
+.slds-input {
+    border-radius: 4px;
+    border: 1px solid #dddbda;
+}
+
+.slds-input:focus {
+    border-color: #0070d2;
+    box-shadow: 0 0 3px rgba(0, 112, 210, 0.3);
+}
+
+.slds-text-heading_medium {
+    color: #16325c;
+    font-weight: 600;
+}
+
+.slds-icon {
+    color: #706e6b;
+}
+
+.slds-icon-standard-account {
+    background-color: #7f8de1;
+}
+
+/* Loading spinner */
+.slds-spinner {
+    margin: 1rem auto;
+}
+
+/* Empty state styling */
+.empty-state {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: #706e6b;
+}
+
+.empty-state lightning-icon {
+    margin-bottom: 1rem;
+}
+
+/* Responsive grid adjustments */
+@media (max-width: 768px) {
+    .slds-col {
+        width: 100% !important;
+        margin-bottom: 1rem;
+    }
+    
+    .slds-grid {
+        flex-direction: column;
+    }
+    
+    .slds-button {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+}
+
+

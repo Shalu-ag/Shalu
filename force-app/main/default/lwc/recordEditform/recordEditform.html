@@ -1,0 +1,18 @@
+<template>
+    <lightning-card title="REcord Edit form">
+        <lightning-layout>
+            <lightning-layout-item>
+                <lightning-record-edit-form 
+                object-api-name="Account"
+                onsuccess={handleSuccess}>
+                <lightning-input-field field-name={accountName}></lightning-input-field>
+                <lightning-input-field field-name={accountType}></lightning-input-field>
+                <lightning-button variant="brand" type="submit" name="save" label="save">
+
+                </lightning-button>
+            </lightning-record-edit-form>
+            </lightning-layout-item>
+        </lightning-layout>
+    </lightning-card>
+    
+</template>

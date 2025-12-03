@@ -1,0 +1,145 @@
+<template>
+    <lightning-card title="Account Management" icon-name="standard:account">
+     <!-- Action Buttons -->
+        <div class="slds-p-around_medium">
+            <lightning-button 
+                label="New Account" 
+                variant="brand" 
+                icon-name="utility:add"
+                onclick={handleNewAccount}
+                class="slds-m-right_small">
+            </lightning-button>
+            <lightning-button 
+                label="Refresh" 
+                variant="neutral" 
+                icon-name="utility:refresh"
+                onclick={handleRefresh}>
+            </lightning-button>
+        </div>
+
+        <!-- Create/Edit Form -->
+        <template if:true={showForm}>
+            <div class="slds-p-around_medium slds-box slds-theme_shade">
+                <h3 class="slds-text-heading_medium slds-m-bottom_medium">
+                    {formTitle}
+                </h3>
+                
+                <lightning-record-edit-form
+                    object-api-name="Account"
+                    record-id={selectedAccountId}
+                    onsubmit={handleSubmit}
+                    onsuccess={handleSuccess}
+                    onerror={handleError}
+                    layout-type="Full">
+                    
+                    <div class="slds-grid slds-wrap">
+                        <div class="slds-col slds-size_1-of-2 slds-p-horizontal_small">
+                            <lightning-input-field field-name="Name" required></lightning-input-field>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2 slds-p-horizontal_small">
+                            <lightning-input-field field-name="AccountNumber"></lightning-input-field>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2 slds-p-horizontal_small">
+                            <lightning-input-field field-name="Type"></lightning-input-field>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2 slds-p-horizontal_small">
+                            <lightning-input-field field-name="Industry"></lightning-input-field>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2 slds-p-horizontal_small">
+                            <lightning-input-field field-name="Phone"></lightning-input-field>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2 slds-p-horizontal_small">
+                            <lightning-input-field field-name="Website"></lightning-input-field>
+                        </div>
+                        <div class="slds-col slds-size_1-of-1 slds-p-horizontal_small">
+                            <lightning-input-field field-name="Description"></lightning-input-field>
+                        </div>
+                        <div class="slds-col slds-size_1-of-1 slds-p-horizontal_small">
+                            <lightning-input-field field-name="Email__c"></lightning-input-field>
+                        </div>
+                         <div class="slds-col slds-size_1-of-1 slds-p-horizontal_small">
+                            <lightning-input-field field-name="Rating"></lightning-input-field>
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="slds-m-top_medium slds-text-align_right">
+                        <lightning-button 
+                            label="Cancel" 
+                            variant="neutral" 
+                            onclick={handleCancel}
+                            class="slds-m-right_small">
+                        </lightning-button>
+                        <lightning-button 
+                            label="Save" 
+                            variant="brand" 
+                            type="submit">
+                        </lightning-button>
+                    </div>
+                </lightning-record-edit-form>
+            </div>
+        </template>
+
+        <!-- Accounts Data Table -->
+        <div class="slds-p-around_medium">
+            <template if:true={accounts.length}>
+                <lightning-datatable
+                    data={accounts}
+                    columns={columns}
+                    key-field="Id"
+                    hide-checkbox-column="false"
+                    onrowselection={handleRowSelection}
+                    onrowaction={handleRowAction}
+                    sorted-by={sortBy}
+                    sorted-direction={sortDirection}
+                    onsort={handleSort}>
+                </lightning-datatable>
+
+            <div class="slds-p-around_medium">
+                <lightning-button label="Previous" onclick={handlePrevious} disabled={isFirstPage}></lightning-button>
+                <span>Page {currentPage} of {totalPages}</span>
+                <lightning-button label="Next" onclick={handleNext} disabled={isLastPage}></lightning-button>
+            </div>
+
+            </template>
+            <template if:true={accounts.error}>
+                <p>Error loading accounts: {accounts.error}</p>
+            </template>
+            
+            <template if:false={accounts.length}>
+                <div class="slds-text-align_center slds-p-vertical_large">
+                    <lightning-icon icon-name="standard:account" size="large" class="slds-m-bottom_small"></lightning-icon>
+                    <p class="slds-text-body_regular">No accounts found. Create your first account to get started.</p>
+                </div>
+            </template>
+        </div>
+
+        <!-- Delete Confirmation Modal -->
+        <template if:true={showDeleteModal}>
+            <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <h2 class="slds-text-heading_medium">Confirm Delete</h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium">
+                        <p>Are you sure you want to delete the account "{accountToDelete.Name}"? This action cannot be undone.</p>
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <lightning-button 
+                            label="Cancel" 
+                            variant="neutral" 
+                            onclick={handleDeleteCancel}
+                            class="slds-m-right_small">
+                        </lightning-button>
+                        <lightning-button 
+                            label="Delete" 
+                            variant="destructive" 
+                            onclick={handleDeleteConfirm}>
+                        </lightning-button>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+    </lightning-card>
+</template>

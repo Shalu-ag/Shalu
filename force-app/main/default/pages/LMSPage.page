@@ -1,0 +1,61 @@
+<apex:page >
+    <apex:slds />
+    <div style="margin:20px;">
+        <p><strong>Enter Your Message Here:</strong></p>
+        <input type="text" id="theMessage" />
+        <br/><br/>
+        <button onclick="publishMC()">Publish Msg</button>
+        <button onclick="subscribeMC()">Subscribe</button>
+        <button onclick="unsubscribeMC()">Unsubscribe</button>
+        <br/><br/>
+        <p><strong>Received message:</strong></p>
+        <pre id="MCMessageText">--</pre>
+    </div>
+
+
+    <script>
+        var SAMPLEMC = "{!$MessageChannel.MyMessageChannel__c}";
+        var subscriptionToMC;
+
+
+        function publishMC() {
+            const message = {
+                messageToSend: document.getElementById('theMessage').value,
+                sourceSystem: "From Visualforce Page"
+            };
+
+
+            if (typeof sforce !== 'undefined' && sforce.one) {
+                sforce.one.publish(SAMPLEMC, message);
+                console.log('Published:', message);
+            } else {
+                alert('sforce.one is not available. Make sure this VF page is opened in Lightning Experience.');
+            }
+        }
+
+
+        function displayMessage(message) {
+            var textLabel = document.getElementById("MCMessageText");
+            textLabel.innerText = message ? JSON.stringify(message, null, 2) : 'no message payload';
+        }
+
+
+        function subscribeMC() {
+            if (!subscriptionToMC && sforce && sforce.one) {
+                subscriptionToMC = sforce.one.subscribe(SAMPLEMC, displayMessage);
+                console.log('Subscribed to message channel');
+            }
+        }
+
+
+        function unsubscribeMC() {
+            if (subscriptionToMC && sforce && sforce.one) {
+                sforce.one.unsubscribe(subscriptionToMC);
+                subscriptionToMC = null;
+                console.log('Unsubscribed from message channel');
+            }
+        }
+    </script>
+</apex:page>
+
+
