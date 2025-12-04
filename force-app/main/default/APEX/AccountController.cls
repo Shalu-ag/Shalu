@@ -2,6 +2,7 @@ public with sharing class AccountController {
     
     /**
      * Get all accounts with basic fields
+     * * Get all accounts with basic fields
      * @return List<Account> List of accounts
      */
     @AuraEnabled(cacheable=true)
