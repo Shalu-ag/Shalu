@@ -9,7 +9,7 @@ public with sharing class ContactCreationController {
             }
             
             // Create new contact
-            // Create new contact
+            // Add Contact
             Contact newContact = new Contact();
             newContact.FirstName = firstName;
             newContact.LastName = lastName;
